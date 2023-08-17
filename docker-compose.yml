@@ -1,0 +1,31 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    image: laravel-app
+    ports:
+      - "8000:9000"
+    volumes:
+      - .:/var/www/html
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+      - APP_KEY=base64:6SnfWjmZ41cjZs4PkCdcRMrpAWJLjmU083XP2Iuh+Zg=
+      - DB_CONNECTION=mysql
+      - DB_HOST=db # Use the service name defined below
+      - DB_PORT=3306
+      - DB_DATABASE=codesherpas
+      - DB_USERNAME=root
+      - DB_PASSWORD=
+
+  db:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: your_root_password
+      MYSQL_DATABASE: codesherpas
+      MYSQL_USER: root
+      MYSQL_PASSWORD:
